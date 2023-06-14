@@ -14,7 +14,7 @@ const domEvents = () => {
     }
   });
 
-  document.querySelector('#order-page').addEventListener('click', (e) => {
+  document.querySelector('#all-orders').addEventListener('click', (e) => {
     if (e.target.id.includes('delete-btn')) {
       // eslint-disable-next-line no-alert
       if (window.confirm('DELETE ORDER?')) {

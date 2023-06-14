@@ -1,13 +1,15 @@
+import navbar from '../components/navBar';
 import clearDom from '../utils/clearDom';
 import renderToDom from '../utils/renderToDom';
 
 const emptyOrders = () => {
   const domString = '<h1>No Orders</h1>';
-  renderToDom('#order-page', domString);
+  renderToDom('#all-orders', domString);
 };
 
 const viewOrders = (array) => {
   clearDom();
+  navbar();
 
   let domString = '';
   array.forEach((item) => {
@@ -23,7 +25,7 @@ const viewOrders = (array) => {
     `;
   });
 
-  renderToDom('#order-page', domString);
+  renderToDom('#all-orders', domString);
 };
 
 export { emptyOrders, viewOrders };
