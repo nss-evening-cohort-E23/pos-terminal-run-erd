@@ -19,7 +19,7 @@ const getOrder = () => new Promise((resolve, reject) => {
 });
 
 const deleteOrder = (firebaseKey) => new Promise((resolve, reject) => {
-  fetch(`${endPoint}/orders/${firebaseKey}.json`, {
+  fetch(`${endPoint}/order/${firebaseKey}.json`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
