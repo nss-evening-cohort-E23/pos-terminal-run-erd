@@ -1,3 +1,4 @@
+import logoutButton from '../components/logoutButton';
 import navbar from '../components/navBar';
 import clearDom from '../utils/clearDom';
 import renderToDom from '../utils/renderToDom';
@@ -10,6 +11,7 @@ const emptyOrders = () => {
 const viewOrders = (array) => {
   clearDom();
   navbar();
+  logoutButton();
 
   let domString = '';
   array.forEach((item) => {
