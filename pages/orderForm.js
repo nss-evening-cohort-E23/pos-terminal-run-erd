@@ -9,14 +9,10 @@ const orderForm = () => {
   getMenu().then((array) => {
     array.forEach((item) => {
       domItems += `
-      ${item.itemName}
+      <a class="dropdown-item" href="#">${item.itemName}</a>
       `;
-      console.warn(domItems);
     });
-  });
-  // renderToDom('#drop-items', domItems);
-
-  const domString = `
+    const domString = `
   <form>
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">Order Name</label>
@@ -45,15 +41,15 @@ const orderForm = () => {
         Dropdown button
       </button>
       <ul class="dropdown-menu">
-        <div item="drop-items" href=${domItems}></div>
+        <div item="drop-items">${domItems}</div>
       </ul>
     </div>
   </form>
   `;
 
-  console.warn(domItems);
-
-  renderToDom('#form-area', domString);
+    renderToDom('#form-area', domString);
+  });
+  // renderToDom('#drop-items', domItems);
 };
 
 export default orderForm;
