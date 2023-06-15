@@ -8,8 +8,20 @@ const getMenu = () => new Promise((resolve, reject) => {
     },
   })
     .then((response) => response.json())
-    .then((data) => resolve(data))
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
     .catch(reject);
 });
 
 export default getMenu;
+
+// array.forEach((item) => {
+//     domItems += `
+//     <li><a class="dropdown-item" href="#">${item.itemName}</a></li>
+//     `;
+//   });

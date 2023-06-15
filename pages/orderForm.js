@@ -1,10 +1,18 @@
 import clearDom from '../utils/clearDom';
 import renderToDom from '../utils/renderToDom';
+import getMenu from '../api/menuData';
 
 const orderForm = () => {
   clearDom();
 
-  const domString = `
+  let domItems = '';
+  getMenu().then((array) => {
+    array.forEach((item) => {
+      domItems += `
+      <a class="dropdown-item" href="#">${item.itemName}</a>
+      `;
+    });
+    const domString = `
   <form>
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">Order Name</label>
@@ -28,10 +36,20 @@ const orderForm = () => {
         Walk In Order
       </label>
     </div>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Dropdown button
+      </button>
+      <ul class="dropdown-menu">
+        <div item="drop-items">${domItems}</div>
+      </ul>
+    </div>
   </form>
   `;
 
-  renderToDom('#form-area', domString);
+    renderToDom('#form-area', domString);
+  });
+  // renderToDom('#drop-items', domItems);
 };
 
 export default orderForm;
