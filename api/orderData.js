@@ -56,6 +56,11 @@ const createOrder = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+// get order details
+const orderDetails = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(${endPoint})
+})
+
 export {
   getOrder, deleteOrder, updateOrder, createOrder
 };
