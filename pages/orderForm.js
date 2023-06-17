@@ -44,8 +44,8 @@ const orderForm = () => {
       </label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="OrderRadio" id="walk-order" value="walk-in">
-      <label class="form-check-label" for="walk-order" checked>
+      <input class="form-check-input" type="radio" name="OrderRadio" id="walk-order">
+      <label class="form-check-label" for="walk-order" value="walk-in" checked>
         Walk In Order
       </label>
     </div>
