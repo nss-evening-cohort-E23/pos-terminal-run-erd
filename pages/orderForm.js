@@ -1,10 +1,12 @@
 import clearDom from '../utils/clearDom';
 import renderToDom from '../utils/renderToDom';
 import { getMenu, getSingleMenuItem } from '../api/menuData';
-import { createOrder, getOrder, updateOrder } from '../api/orderData';
+import {
+  createOrder, getOrder, updateOrder, getSingleOrder
+} from '../api/orderData';
 import { viewOrders } from './orders';
 
-const orderForm = () => {
+const orderForm = (obj = {}) => {
   clearDom();
 
   // Populate pulldown for menu items.
@@ -28,14 +30,14 @@ const orderForm = () => {
     const domString = `
   <form>
     <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label">Order Name</label>
-      <input type="name" class="form-control" id="form-name" placeholder="Input Name">
+      <label for="name" class="form-label">Order Name</label>
+      <input type="name" class="form-control" id="form-name" placeholder="Input Name" value="${obj.orderName || ''}" required>
 
-      <label for="exampleFormControlInput1" class="form-label">Phone Number</label>
-      <input type="name" class="form-control" id="form-phone" placeholder="Input Phone Number">
+      <label for="phone-number" class="form-label">Phone Number</label>
+      <input type="name" class="form-control" id="form-phone" placeholder="Input Phone Number" value="${obj.orderPhone || ''}" required>
 
-      <label for="exampleFormControlInput1" class="form-label">Order Email</label>
-      <input type="email" class="form-control" id="form-email" placeholder="Input Email">
+      <label for="order-email" class="form-label">Order Email</label>
+      <input type="email" class="form-control" id="form-email" placeholder="Input Email" value="${obj.orderEmail || ''}" required>
     </div>
     <div class="form-check">
       <input class="form-check-input" type="radio" name="OrderRadio" id="phone-radio" value="phoned-in">
@@ -56,7 +58,7 @@ const orderForm = () => {
       <ul class="dropdown-menu">
         <div item="drop-items">${domItems}</div>
       </ul>
-      <button id="form-button">Submit</button>
+      <button id="${obj.firebaseKey ? `update-order--${obj.firebaseKey}` : 'form-button'}">Submit</button>
     </div>
   </form>
   `;
@@ -100,7 +102,7 @@ const orderForm = () => {
           cart.push(payload);
           displayCart();
         });
-      }
+        }
 
       // Adding new order plus clearing cart
       if (e.target.id.includes('form-button')) {
@@ -108,7 +110,7 @@ const orderForm = () => {
         // document.querySelector('#form-area').innerHTML = '';
         const payload = {
           isOpen: true,
-          orderBasePrice: document.querySelector('#cart-total').value,
+          orderBasePrice: document.querySelector('#cart-total'),
           orderDate: new Date(),
           orderDetails: cart,
           OrderEmail: document.querySelector('#form-email').value,
@@ -130,6 +132,37 @@ const orderForm = () => {
         });
 
         cart = [];
+      }
+
+      if (e.target.id.includes('update-order')) {
+        const [, firebaseKey] = e.target.id.split('--');
+        const payload = {
+          isOpen: true,
+          orderBasePrice: document.querySelector('#cart-total'),
+          orderDetails: cart,
+          orderEmail: document.querySelector('#form-email').value,
+          orderName: document.querySelector('#form-name').value,
+          orderPhone: document.querySelector('#form-phone').value,
+          firebaseKey,
+        };
+
+        updateOrder(payload).then(() => {
+          getOrder().then(viewOrders);
+        });
+       };
+        // const payload = {
+        //   isOpen: true,
+        //   orderBasePrice: document.querySelector('#cart-total'),
+        //   orderDetails: cart,
+        //   orderEmail: document.querySelector('#form-email').value,
+        //   orderName: document.querySelector('#form-name').value,
+        //   orderPhone: document.querySelector('#form-phone').value,
+        //   firebaseKey,
+        // };
+
+        // updateOrder(payload).then(() => {
+        //   getOrder().then(viewOrders);
+        // });
       }
     });
     renderToDom('#form-area', domString);
