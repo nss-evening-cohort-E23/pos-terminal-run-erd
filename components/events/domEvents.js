@@ -25,6 +25,22 @@ const domEvents = () => {
         });
       }
     }
+
+    if (e.target.id.includes('edit-btn')) {
+      const [, firebaseKey] = e.target.id.split('--');
+
+      getOrder(firebaseKey).then((orderObj) => orderForm(orderObj));
+    }
+  });
+  document.querySelector('#navigation').addEventListener('click', (e) => {
+    if (e.target.id.includes('create')) {
+      orderForm();
+    }
+  });
+  document.querySelector('#navigation').addEventListener('click', (e) => {
+    if (e.target.id.includes('view')) {
+      getOrder().then(viewOrders);
+    }
   });
 };
 
