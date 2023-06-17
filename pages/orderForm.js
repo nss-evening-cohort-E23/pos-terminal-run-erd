@@ -1,10 +1,13 @@
 import clearDom from '../utils/clearDom';
 import renderToDom from '../utils/renderToDom';
 import { getMenu, getSingleMenuItem } from '../api/menuData';
+import { createOrder, getOrder, updateOrder } from '../api/orderData';
+import { viewOrders } from './orders';
 
 const orderForm = () => {
   clearDom();
 
+  // Populate pulldown for menu items.
   let domItems = '';
   getMenu().then((array) => {
     array.forEach((item) => {
@@ -60,6 +63,7 @@ const orderForm = () => {
 
     let cartString = '';
 
+    // Function to display the card once an item is chosen.
     const displayCart = () => {
       cartItems = '';
       let baseTotal = 0;
@@ -75,7 +79,7 @@ const orderForm = () => {
         <label for="exampleFormControlSelect2">Cart</label>
         <select multiple class="form-control" id="cart-box">
           <option id="cart-total" value="${baseTotal}">Total: $${baseTotal}</option>
-          <option id="cart-value" value="${cart}">------</option>
+          <option>------</option>
           ${cartItems}
         </select>
       </div>
@@ -83,6 +87,7 @@ const orderForm = () => {
       renderToDom('#cart-area', cartString);
     };
 
+    // Event listener that will add a menu item to cart when clicked on the dropdown.
     document.querySelector('#form-area').addEventListener('click', (e) => {
       if (e.target.id.includes('order-item')) {
         const [, firebaseKey] = e.target.id.split('--');
@@ -96,16 +101,70 @@ const orderForm = () => {
           displayCart();
         });
       }
+
+      // Adding new order plus clearing cart
+      if (e.target.id.includes('form-button')) {
+        // cart = [];
+        // document.querySelector('#form-area').innerHTML = '';
+        const payload = {
+          isOpen: true,
+          orderBasePrice: document.querySelector('#cart-total').value,
+          orderDate: new Date(),
+          orderDetails: cart,
+          OrderEmail: document.querySelector('#form-email').value,
+          orderName: document.querySelector('#form-name').value,
+          orderPhone: document.querySelector('#form-phone').value,
+          orderTip: 0,
+          orderTotal: 0,
+          // orderType: document.querySelector('input[name= OrderRadio]:checked').value,
+          paymentType: '',
+          uid: '',
+        };
+
+        createOrder(payload).then(({ name }) => {
+          const patchPayload = { firebaseKey: name };
+
+          updateOrder(patchPayload).then(() => {
+            getOrder().then((orders) => viewOrders(orders));
+          });
+        });
+
+        cart = [];
+      }
     });
     renderToDom('#form-area', domString);
 
-    // clearing the cart on click event.
-    document.querySelector('#form-area').addEventListener('click', (e) => {
-      if (e.target.id.includes('form-button')) {
-        cart = [];
-        document.querySelector('#form-area').innerHTML = '';
-      }
-    });
+    // Creation of a new order + clearing the cart on click.
+    // document.querySelector('#form-area').addEventListener('click', (e) => {
+    //   if (e.target.id.includes('form-button')) {
+    //     // cart = [];
+    //     // document.querySelector('#form-area').innerHTML = '';
+    //     const payload = {
+    //       isOpen: true,
+    //       orderBasePrice: document.querySelector('#cart-total').value,
+    //       orderDate: new Date(),
+    //       orderDetails: cart,
+    //       OrderEmail: document.querySelector('#form-email').value,
+    //       orderName: document.querySelector('#form-name').value,
+    //       orderPhone: document.querySelector('#form-phone').value,
+    //       orderTip: 0,
+    //       orderTotal: 0,
+    //       orderType: document.querySelector('input[name= OrderRadio]:checked').value,
+    //       paymentType: '',
+    //       uid: '',
+    //     };
+
+    //     createOrder(payload).then(({ name }) => {
+    //       const patchPayload = { firebaseKey: name };
+
+    //       updateOrder(patchPayload).then(() => {
+    //         getOrder().then((orders) => viewOrders(orders));
+    //       });
+    //     });
+
+    //     cart = [];
+    //   }
+    // });
   });
   // renderToDom('#drop-items', domItems);
 };
