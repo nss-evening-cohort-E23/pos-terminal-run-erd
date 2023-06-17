@@ -32,6 +32,16 @@ const domEvents = () => {
       getSingleOrder(firebaseKey).then((orderObj) => orderForm(orderObj));
     }
   });
+  document.querySelector('#navigation').addEventListener('click', (e) => {
+    if (e.target.id.includes('create')) {
+      orderForm();
+    }
+  });
+  document.querySelector('#navigation').addEventListener('click', (e) => {
+    if (e.target.id.includes('view')) {
+      getOrder().then(viewOrders);
+    }
+  });
 };
 
 export default domEvents;

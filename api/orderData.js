@@ -68,6 +68,26 @@ const createOrder = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+// get order details
+const orderDetails = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endPoint}/orders/${firebaseKey}.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
+});
+
 export {
-  getOrder, deleteOrder, updateOrder, createOrder, getSingleOrder
+  getOrder, deleteOrder, updateOrder, createOrder, orderDetails
+    getSingleOrder
 };
