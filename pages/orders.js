@@ -1,3 +1,4 @@
+// import navEvents from '../components/events/navEvents';
 import logoutButton from '../components/logoutButton';
 import navbar from '../components/navBar';
 import clearDom from '../utils/clearDom';
@@ -12,7 +13,7 @@ const viewOrders = (array) => {
   clearDom();
   navbar();
   logoutButton();
-
+  // navEvents();
   let domString = '';
   array.forEach((item) => {
     domString += `
