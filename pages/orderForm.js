@@ -38,14 +38,14 @@ const orderForm = () => {
       <input type="email" class="form-control" id="form-email" placeholder="Input Email">
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="OrderRadio" id="phone-radio" value="phoned-in">
+      <input class="form-check-input" type="radio" name="OrderRadio" id="phone-radio" value="phoned">
       <label class="form-check-label" for="phone-order">
         Phone Order
       </label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="OrderRadio" id="walk-order">
-      <label class="form-check-label" for="walk-order" value="walk-in" checked>
+      <input class="form-check-input" type="radio" name="OrderRadio" id="walk-order" value="walked">
+      <label class="form-check-label" for="walk-order">
         Walk In Order
       </label>
     </div>
