@@ -116,10 +116,11 @@ const orderForm = () => {
           orderPhone: document.querySelector('#form-phone').value,
           orderTip: 0,
           orderTotal: 0,
-          // orderType: document.querySelector('input[name= OrderRadio]:checked').value,
+          orderType: document.querySelector('input[name=OrderRadio]:checked').value,
           paymentType: '',
           uid: '',
         };
+        console.warn(payload);
 
         createOrder(payload).then(({ name }) => {
           const patchPayload = { firebaseKey: name };
