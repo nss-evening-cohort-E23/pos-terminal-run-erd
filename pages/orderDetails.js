@@ -12,18 +12,17 @@ const orderDetailsPage = (obj) => {
   renderToDom('#order-total', domString1);
 
   let domString2 = '';
-  obj.itemsArray.forEach((item) => {
-    domString2 += `
+
+  domString2 += `
       <div class="card" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title">${item.itemName}</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary">$${item.basePrice}</h6>
+          <h5 class="card-title">${obj.itemName}</h5>
+          <h6 class="card-subtitle mb-2 text-body-secondary">$${obj.basePrice}</h6>
           <a href="#" class="card-link">Remove Item</a>
         </div>
       </div> 
     `;
-    renderToDom('#order-details', domString2);
-  });
+  renderToDom('#order-details', domString2);
 };
 
 export default orderDetailsPage;

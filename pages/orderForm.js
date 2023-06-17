@@ -1,8 +1,9 @@
 import clearDom from '../utils/clearDom';
 import renderToDom from '../utils/renderToDom';
 import { getMenu, getSingleMenuItem } from '../api/menuData';
-import { createOrder, getOrder, updateOrder } from '../api/orderData';
-import { viewOrders } from './orders';
+import { createOrder, orderDetails, updateOrder } from '../api/orderData';
+// import { viewOrders } from './orders';
+import orderDetailsPage from './orderDetails';
 
 const orderForm = () => {
   clearDom();
@@ -124,8 +125,8 @@ const orderForm = () => {
         createOrder(payload).then(({ name }) => {
           const patchPayload = { firebaseKey: name };
 
-          updateOrder(patchPayload).then(() => {
-            getOrder().then((orders) => viewOrders(orders));
+          updateOrder(patchPayload).then((firebaseKey) => {
+            orderDetails(firebaseKey).then((orders) => orderDetailsPage(orders));
           });
         });
 
