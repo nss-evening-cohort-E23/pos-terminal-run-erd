@@ -102,7 +102,7 @@ const orderForm = (obj = {}) => {
           cart.push(payload);
           displayCart();
         });
-        }
+      }
 
       // Adding new order plus clearing cart
       if (e.target.id.includes('form-button')) {
@@ -136,20 +136,24 @@ const orderForm = (obj = {}) => {
 
       if (e.target.id.includes('update-order')) {
         const [, firebaseKey] = e.target.id.split('--');
-        const payload = {
-          isOpen: true,
-          orderBasePrice: document.querySelector('#cart-total'),
-          orderDetails: cart,
-          orderEmail: document.querySelector('#form-email').value,
-          orderName: document.querySelector('#form-name').value,
-          orderPhone: document.querySelector('#form-phone').value,
-          firebaseKey,
-        };
+        getSingleOrder(firebaseKey).then((item) => {
+          cart = item.orderDetails;
+          displayCart();
 
-        updateOrder(payload).then(() => {
-          getOrder().then(viewOrders);
+          const payload = {
+            isOpen: true,
+            orderBasePrice: document.querySelector('#cart-total'),
+            orderDetails: cart,
+            orderEmail: document.querySelector('#form-email').value,
+            orderName: document.querySelector('#form-name').value,
+            orderPhone: document.querySelector('#form-phone').value,
+            firebaseKey,
+          };
+
+          updateOrder(payload).then(() => {
+            getOrder().then(viewOrders);
+          });
         });
-       };
         // const payload = {
         //   isOpen: true,
         //   orderBasePrice: document.querySelector('#cart-total'),

@@ -88,6 +88,6 @@ const orderDetails = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 export {
-  getOrder, deleteOrder, updateOrder, createOrder, orderDetails
-    getSingleOrder
+  getOrder, deleteOrder, updateOrder, createOrder, orderDetails,
+  getSingleOrder
 };
