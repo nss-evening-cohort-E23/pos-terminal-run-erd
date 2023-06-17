@@ -25,6 +25,12 @@ const domEvents = () => {
         });
       }
     }
+
+    if (e.target.id.includes('edit-btn')) {
+      const [, firebaseKey] = e.target.id.split('--');
+
+      getOrder(firebaseKey).then((orderObj) => orderForm(orderObj));
+    }
   });
 };
 
