@@ -4,14 +4,14 @@ import domBuilder from '../components/shared/domBuilder';
 import landingPage from '../pages/landingPage';
 // import { viewOrders } from '../pages/orders';
 import domEvents from '../components/events/domEvents';
-import formEvents from '../components/events/formEvents';
+// import formEvents from '../components/events/formEvents';
 
 const startApp = () => {
   domBuilder();
   landingPage();
   // navbar();
   domEvents();
-  formEvents();
+  // formEvents();
 
   // getOrder().then((cards) => viewOrders(cards));
 };

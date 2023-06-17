@@ -1,10 +1,13 @@
 import clearDom from '../utils/clearDom';
 import renderToDom from '../utils/renderToDom';
 import { getMenu, getSingleMenuItem } from '../api/menuData';
+import { createOrder, getOrder, updateOrder } from '../api/orderData';
+import { viewOrders } from './orders';
 
 const orderForm = () => {
   clearDom();
 
+  // Populate pulldown for menu items.
   let domItems = '';
   getMenu().then((array) => {
     array.forEach((item) => {
@@ -26,22 +29,22 @@ const orderForm = () => {
   <form>
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">Order Name</label>
-      <input type="name" class="form-control" id="exampleFormControlInput1" placeholder="Input Name">
+      <input type="name" class="form-control" id="form-name" placeholder="Input Name">
 
       <label for="exampleFormControlInput1" class="form-label">Phone Number</label>
-      <input type="name" class="form-control" id="exampleFormControlInput1" placeholder="Input Phone Number">
+      <input type="name" class="form-control" id="form-phone" placeholder="Input Phone Number">
 
       <label for="exampleFormControlInput1" class="form-label">Order Email</label>
-      <input type="name" class="form-control" id="exampleFormControlInput1" placeholder="Input Email">
+      <input type="email" class="form-control" id="form-email" placeholder="Input Email">
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="OrderRadio" id="phone-radio">
+      <input class="form-check-input" type="radio" name="OrderRadio" id="phone-radio" value="phoned-in">
       <label class="form-check-label" for="phone-order">
         Phone Order
       </label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="OrderRadio" id="walk-order">
+      <input class="form-check-input" type="radio" name="OrderRadio" id="walk-order" value="walk-in">
       <label class="form-check-label" for="walk-order" checked>
         Walk In Order
       </label>
@@ -60,6 +63,7 @@ const orderForm = () => {
 
     let cartString = '';
 
+    // Function to display the card once an item is chosen.
     const displayCart = () => {
       cartItems = '';
       let baseTotal = 0;
@@ -74,7 +78,7 @@ const orderForm = () => {
       <div class="form-group">
         <label for="exampleFormControlSelect2">Cart</label>
         <select multiple class="form-control" id="cart-box">
-          <option>Total: $${baseTotal}</option>
+          <option id="cart-total" value="${baseTotal}">Total: $${baseTotal}</option>
           <option>------</option>
           ${cartItems}
         </select>
@@ -83,6 +87,7 @@ const orderForm = () => {
       renderToDom('#cart-area', cartString);
     };
 
+    // Event listener that will add a menu item to cart when clicked on the dropdown.
     document.querySelector('#form-area').addEventListener('click', (e) => {
       if (e.target.id.includes('order-item')) {
         const [, firebaseKey] = e.target.id.split('--');
@@ -96,16 +101,70 @@ const orderForm = () => {
           displayCart();
         });
       }
+
+      // Adding new order plus clearing cart
+      if (e.target.id.includes('form-button')) {
+        // cart = [];
+        // document.querySelector('#form-area').innerHTML = '';
+        const payload = {
+          isOpen: true,
+          orderBasePrice: document.querySelector('#cart-total').value,
+          orderDate: new Date(),
+          orderDetails: cart,
+          OrderEmail: document.querySelector('#form-email').value,
+          orderName: document.querySelector('#form-name').value,
+          orderPhone: document.querySelector('#form-phone').value,
+          orderTip: 0,
+          orderTotal: 0,
+          // orderType: document.querySelector('input[name= OrderRadio]:checked').value,
+          paymentType: '',
+          uid: '',
+        };
+
+        createOrder(payload).then(({ name }) => {
+          const patchPayload = { firebaseKey: name };
+
+          updateOrder(patchPayload).then(() => {
+            getOrder().then((orders) => viewOrders(orders));
+          });
+        });
+
+        cart = [];
+      }
     });
     renderToDom('#form-area', domString);
 
-    // clearing the cart on click event.
-    document.querySelector('#form-area').addEventListener('click', (e) => {
-      if (e.target.id.includes('form-button')) {
-        cart = [];
-        document.querySelector('#form-area').innerHTML = '';
-      }
-    });
+    // Creation of a new order + clearing the cart on click.
+    // document.querySelector('#form-area').addEventListener('click', (e) => {
+    //   if (e.target.id.includes('form-button')) {
+    //     // cart = [];
+    //     // document.querySelector('#form-area').innerHTML = '';
+    //     const payload = {
+    //       isOpen: true,
+    //       orderBasePrice: document.querySelector('#cart-total').value,
+    //       orderDate: new Date(),
+    //       orderDetails: cart,
+    //       OrderEmail: document.querySelector('#form-email').value,
+    //       orderName: document.querySelector('#form-name').value,
+    //       orderPhone: document.querySelector('#form-phone').value,
+    //       orderTip: 0,
+    //       orderTotal: 0,
+    //       orderType: document.querySelector('input[name= OrderRadio]:checked').value,
+    //       paymentType: '',
+    //       uid: '',
+    //     };
+
+    //     createOrder(payload).then(({ name }) => {
+    //       const patchPayload = { firebaseKey: name };
+
+    //       updateOrder(patchPayload).then(() => {
+    //         getOrder().then((orders) => viewOrders(orders));
+    //       });
+    //     });
+
+    //     cart = [];
+    //   }
+    // });
   });
   // renderToDom('#drop-items', domItems);
 };
