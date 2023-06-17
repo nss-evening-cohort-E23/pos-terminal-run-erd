@@ -1,6 +1,6 @@
 import clearDom from '../utils/clearDom';
 import renderToDom from '../utils/renderToDom';
-import getMenu from '../api/menuData';
+import { getMenu, getSingleMenuItem } from '../api/menuData';
 
 const orderForm = () => {
   clearDom();
@@ -9,9 +9,19 @@ const orderForm = () => {
   getMenu().then((array) => {
     array.forEach((item) => {
       domItems += `
-      <a class="dropdown-item" href="#">${item.itemName}</a>
+      <a class="dropdown-item" id="order-item--${item.firebaseKey}" href="#">${item.itemName} - $${item.basePrice}</a>
       `;
     });
+
+    let cart = [];
+    let cartItems = '';
+
+    // cart.forEach((item) => {
+    //   cartItems = `
+    //   <option>${item.itemName}</option>
+    //   `;
+    // });
+
     const domString = `
   <form>
     <div class="mb-3">
@@ -43,11 +53,59 @@ const orderForm = () => {
       <ul class="dropdown-menu">
         <div item="drop-items">${domItems}</div>
       </ul>
+      <button id="form-button">Submit</button>
     </div>
   </form>
   `;
 
+    let cartString = '';
+
+    const displayCart = () => {
+      cartItems = '';
+      let baseTotal = 0;
+      cart.forEach((item) => {
+        baseTotal += item.basePrice;
+        cartItems += `
+        <option>${item.itemName} - $${item.basePrice}</option>
+        `;
+      });
+
+      cartString = `
+      <div class="form-group">
+        <label for="exampleFormControlSelect2">Cart</label>
+        <select multiple class="form-control" id="cart-box">
+          <option>Total: $${baseTotal}</option>
+          <option>------</option>
+          ${cartItems}
+        </select>
+      </div>
+      `;
+      renderToDom('#cart-area', cartString);
+    };
+
+    document.querySelector('#form-area').addEventListener('click', (e) => {
+      if (e.target.id.includes('order-item')) {
+        const [, firebaseKey] = e.target.id.split('--');
+
+        getSingleMenuItem(firebaseKey).then((data) => {
+          const payload = {
+            itemName: data.itemName,
+            basePrice: data.basePrice
+          };
+          cart.push(payload);
+          displayCart();
+        });
+      }
+    });
     renderToDom('#form-area', domString);
+
+    // clearing the cart on click event.
+    document.querySelector('#form-area').addEventListener('click', (e) => {
+      if (e.target.id.includes('form-button')) {
+        cart = [];
+        document.querySelector('#form-area').innerHTML = '';
+      }
+    });
   });
   // renderToDom('#drop-items', domItems);
 };
