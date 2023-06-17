@@ -1,7 +1,9 @@
 // import { getMenu, getSingleMenuItem } from '../../api/menuData';
 // import { getOrder } from '../../api/orderData';
 
-import orderForm from '../../pages/orderForm';
+import { createOrder, getOrder, updateOrder } from '../../api/orderData';
+// import orderForm from '../../pages/orderForm';
+import { viewOrders } from '../../pages/orders';
 
 const formEvents = () => {
   document.querySelector('#form-area').addEventListener('click', (e) => {
@@ -18,7 +20,28 @@ const formEvents = () => {
       // });
     }
     if (e.target.id.includes('form-button')) {
-      orderForm();
+      const payload = {
+        isOpen: true,
+        orderBasePrice: document.querySelector('#cart-total').value,
+        orderDate: new Date(),
+        orderDetails: document.querySelector('#cart-value').value,
+        OrderEmail: document.querySelector('#form-email').value,
+        orderName: document.querySelector('#form-name').value,
+        orderPhone: document.querySelector('#form-phone').value,
+        orderTip: 0,
+        orderTotal: 0,
+        orderType: document.querySelector('input[name= OrderRadio]:checked').value,
+        paymentType: '',
+        uid: '',
+      };
+
+      createOrder(payload).then(({ name }) => {
+        const patchPayload = { firebaseKey: name };
+
+        updateOrder(patchPayload).then(() => {
+          getOrder().then((orders) => viewOrders(orders));
+        });
+      });
     }
   });
   // document.getElementById('#cart-box').contentWindow.location.reload(true);

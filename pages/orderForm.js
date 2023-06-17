@@ -26,22 +26,22 @@ const orderForm = () => {
   <form>
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">Order Name</label>
-      <input type="name" class="form-control" id="exampleFormControlInput1" placeholder="Input Name">
+      <input type="name" class="form-control" id="form-name" placeholder="Input Name">
 
       <label for="exampleFormControlInput1" class="form-label">Phone Number</label>
-      <input type="name" class="form-control" id="exampleFormControlInput1" placeholder="Input Phone Number">
+      <input type="name" class="form-control" id="form-phone" placeholder="Input Phone Number">
 
       <label for="exampleFormControlInput1" class="form-label">Order Email</label>
-      <input type="name" class="form-control" id="exampleFormControlInput1" placeholder="Input Email">
+      <input type="email" class="form-control" id="form-email" placeholder="Input Email">
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="OrderRadio" id="phone-radio">
+      <input class="form-check-input" type="radio" name="OrderRadio" id="phone-radio" value="phoned-in">
       <label class="form-check-label" for="phone-order">
         Phone Order
       </label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="OrderRadio" id="walk-order">
+      <input class="form-check-input" type="radio" name="OrderRadio" id="walk-order" value="walk-in">
       <label class="form-check-label" for="walk-order" checked>
         Walk In Order
       </label>
@@ -74,8 +74,8 @@ const orderForm = () => {
       <div class="form-group">
         <label for="exampleFormControlSelect2">Cart</label>
         <select multiple class="form-control" id="cart-box">
-          <option>Total: $${baseTotal}</option>
-          <option>------</option>
+          <option id="cart-total" value="${baseTotal}">Total: $${baseTotal}</option>
+          <option id="cart-value" value="${cart}">------</option>
           ${cartItems}
         </select>
       </div>
