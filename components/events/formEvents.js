@@ -8,6 +8,16 @@ import displayCart from '../../utils/displayCart';
 let cart = [];
 
 const formEvents = () => {
+  document.querySelector('#all-orders').addEventListener('click', (e) => {
+    if (e.target.id.includes('edit-btn')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      getSingleOrder(firebaseKey).then((data) => {
+        cart = data.orderDetails;
+        console.warn(cart);
+      });
+    }
+  });
+
   document.querySelector('#form-area').addEventListener('click', (e) => {
     if (e.target.id.includes('update-order')) {
       const [, firebaseKey] = e.target.id.split('--');
@@ -57,7 +67,7 @@ const formEvents = () => {
         orderBasePrice: document.querySelector('#cart-total'),
         orderDate: new Date(),
         orderDetails: cart || 'error',
-        OrderEmail: document.querySelector('#form-email').value,
+        orderEmail: document.querySelector('#form-email').value,
         orderName: document.querySelector('#form-name').value,
         orderPhone: document.querySelector('#form-phone').value,
         orderTip: 0,
