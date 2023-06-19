@@ -126,7 +126,7 @@ const orderForm = () => {
           const patchPayload = { firebaseKey: name };
 
           updateOrder(patchPayload).then((firebaseKey) => {
-            orderDetails(firebaseKey).then((orders) => orderDetailsPage(orders));
+            orderDetails(firebaseKey).then((order) => orderDetailsPage(order));
           });
         });
 
