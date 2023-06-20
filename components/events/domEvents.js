@@ -7,11 +7,8 @@ import {
 import { viewOrders } from '../../pages/orders';
 import orderForm from '../../pages/orderForm';
 import displayCart from '../../utils/displayCart';
-<<<<<<< HEAD
 import orderDetailsPage from '../../pages/orderDetails';
-=======
 import viewRevenue from '../../pages/revenue';
->>>>>>> develop
 
 const domEvents = (user) => {
   document.querySelector('#landing-area').addEventListener('click', (e) => {
@@ -68,7 +65,8 @@ const domEvents = (user) => {
 
   document.querySelector('#all-orders').addEventListener('click', (e) => {
     if (e.target.id.includes('detail-btn')) {
-      orderDetails().then(orderDetailsPage);
+      const [, firebaseKey] = e.target.id.split('--');
+      getSingleOrder(firebaseKey).then(orderDetailsPage);
     }
   });
 };
