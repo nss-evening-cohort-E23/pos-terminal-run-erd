@@ -4,6 +4,7 @@ import {
 import { viewOrders } from '../../pages/orders';
 import { getSingleMenuItem } from '../../api/menuData';
 import displayCart from '../../utils/displayCart';
+// import orderDetailsPage from '../../pages/orderDetails';
 
 let cart = [];
 
@@ -82,7 +83,8 @@ const formEvents = (user) => {
         const patchPayload = { firebaseKey: name };
 
         updateOrder(patchPayload).then(() => {
-          getOrder().then((orders) => viewOrders(orders));
+          getOrder().then(viewOrders);
+          // console.warn(firebaseKey);
         });
       });
       cart = [];

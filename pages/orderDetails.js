@@ -1,29 +1,51 @@
-import navbar from '../components/navBar';
+// import navbar from '../components/navBar';
 import clearDom from '../utils/clearDom';
 import renderToDom from '../utils/renderToDom';
 
 const orderDetailsPage = (obj) => {
   clearDom();
-  navbar();
+  // navbar();
 
-  const domString1 = `
-    <h1>Total: ${obj.orderBasePrice}</h1>
-  `;
-  renderToDom('#order-total', domString1);
+  let domString = '';
+  let menuString = '';
 
-  let domString2 = '';
-  obj.itemsArray.forEach((item) => {
-    domString2 += `
+  obj.orderDetails.forEach((item) => {
+    menuString += `
+    <li class="list-group-item">${item.itemName} - $${item.basePrice}</li>
+    `;
+  });
+
+  domString += `
+      <h1>Total: ${obj.orderBasePrice}</h1>
       <div class="card" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title">${item.itemName}</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary">$${item.basePrice}</h6>
+          <h5 class="card-title">${obj.orderName}</h5>
+          <h6 class="card-subtitle mb-2 text-body-secondary">${obj.orderEmail}</h6>
+          <h6 class="card-subtitle mb-2 text-body-secondary">${obj.orderPhone}</h6>
+
+          <ul class="list-group">
+            ${menuString}
+          </ul>
+
           <a href="#" class="card-link">Remove Item</a>
         </div>
-      </div> 
-    `;
-    renderToDom('#order-details', domString2);
-  });
+      </div>`;
+
+  // for (let i = 0; i < obj.orderDetails.length(); i++) {
+  //   domString += `
+  //     <h1>Total: ${obj.orderBasePrice}</h1>
+  //     <div class="card" style="width: 18rem;">
+  //       <div class="card-body">
+  //         <h5 class="card-title">${obj.orderDetails}</h5>
+  //         <h6 class="card-subtitle mb-2 text-body-secondary">$${obj.basePrice}</h6>
+  //         <a href="#" class="card-link">Remove Item</a>
+  //       </div>
+  //     </div>
+  //   `;
+  // }
+
+  renderToDom('#order-details', domString);
+  console.warn(obj);
 };
 
 export default orderDetailsPage;
