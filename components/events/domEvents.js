@@ -7,17 +7,26 @@ import {
 import { viewOrders } from '../../pages/orders';
 import orderForm from '../../pages/orderForm';
 import displayCart from '../../utils/displayCart';
+<<<<<<< HEAD
 import orderDetailsPage from '../../pages/orderDetails';
+=======
+import viewRevenue from '../../pages/revenue';
+>>>>>>> develop
 
-const domEvents = () => {
+const domEvents = (user) => {
   document.querySelector('#landing-area').addEventListener('click', (e) => {
     if (e.target.id.includes('welcome-view')) {
       getOrder().then((orders) => viewOrders(orders));
     }
 
+    if (e.target.id.includes('welcome-rev')) {
+      viewRevenue();
+    }
+
     // Click event to create an order
     if (e.target.id.includes('welcome-create')) {
       orderForm();
+      console.warn(user.uid);
     }
   });
 

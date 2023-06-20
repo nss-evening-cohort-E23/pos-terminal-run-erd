@@ -33,18 +33,16 @@ const orderForm = (obj = {}) => {
       <label for="order-email" class="form-label">Order Email</label>
       <input type="email" class="form-control" id="form-email" placeholder="Input Email" value="${obj.orderEmail || ''}" required>
     </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="OrderRadio" id="phone-radio" value="phoned-in">
-      <label class="form-check-label" for="phone-order">
-        Phone Order
-      </label>
+    
+    <div class="col-auto my-1">
+      <label class="mr-sm-2" for="inlineFormCustomSelect">Order Type</label>
+      <select class="custom-select mr-sm-2" id="form-type">
+        <option selected>Choose...</option>
+        <option value="phoned">Phoned In</option>
+        <option value="walk">Walk In</option>
+      </select>
     </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="OrderRadio" id="walk-order" value="walk-in">
-      <label class="form-check-label" for="walk-order" checked>
-        Walk In Order
-      </label>
-    </div>
+
     <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         Dropdown button
