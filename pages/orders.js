@@ -23,6 +23,7 @@ const viewOrders = (array) => {
         <h6 class="card-subtitle mb-2 text-body-secondary">${item.orderType}</h6>
         <a href="#" class="card-link" id="edit-btn--${item.firebaseKey}">Edit Order</a>
         <a href="#" class="card-link" id="delete-btn--${item.firebaseKey}">Delete Order</a>
+        <a href="#" class="card-link" id="detail-btn--${item.firebaseKey}">Order Details</a>
       </div>
     </div>
     `;

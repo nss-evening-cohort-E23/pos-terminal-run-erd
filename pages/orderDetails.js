@@ -1,19 +1,16 @@
-import navbar from '../components/navBar';
+// import navbar from '../components/navBar';
 import clearDom from '../utils/clearDom';
 import renderToDom from '../utils/renderToDom';
 
 const orderDetailsPage = (obj) => {
   clearDom();
-  navbar();
+  // navbar();
 
-  const domString1 = `
-    <h1>Total: ${obj.orderBasePrice}</h1>
-  `;
-  renderToDom('#order-total', domString1);
+  let domString = '';
 
-  let domString2 = '';
-
-  domString2 += `
+  for (let i = 0; i < obj.orderDetails.length(); i++) {
+    domString += `
+      <h1>Total: ${obj.orderBasePrice}</h1>
       <div class="card" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">${obj.orderDetails}</h5>
@@ -22,7 +19,10 @@ const orderDetailsPage = (obj) => {
         </div>
       </div> 
     `;
-  renderToDom('#form-area', domString2);
+  }
+
+  renderToDom('#order-details', domString);
+  console.warn(obj);
 };
 
 export default orderDetailsPage;
