@@ -95,7 +95,7 @@ const formEvents = (user) => {
       const [, cartId] = e.target.id.split('--');
 
       const index = cart.findIndex((item) => item.cartId === Number(cartId));
-      cart.splice(index, 1);
+      cart.splice(index);
       displayCart(cart);
     }
   });
