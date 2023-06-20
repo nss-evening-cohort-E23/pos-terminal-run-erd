@@ -14,6 +14,7 @@ const domBuilder = () => {
       <div id="landing-area"></div>
       <div id="form-area"></div>
       <div id="cart-area"></div>
+      <div id="revenue"></div>
     </div>
   `;
 
