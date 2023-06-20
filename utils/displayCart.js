@@ -3,10 +3,11 @@ import renderToDom from './renderToDom';
 const displayCart = (arr) => {
   let cartItems = '';
   let baseTotal = 0;
+  let cartId = 0;
   arr.forEach((item) => {
     baseTotal += item.basePrice;
     cartItems += `
-    <option>${item.itemName} - $${item.basePrice}</option>
+    <option id="cart-value--${cartId += 1}">${item.itemName} - $${item.basePrice}</option>
     `;
   });
 
@@ -18,7 +19,7 @@ const displayCart = (arr) => {
       <option>------</option>
       ${cartItems}
     </select>
-  </div>
+    <button class="btn btn-danger" id="delete-item--${cartId}">Remove Item(s)</button>
   `;
   renderToDom('#cart-area', cartString);
 };

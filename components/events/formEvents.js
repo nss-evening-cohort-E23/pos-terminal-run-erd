@@ -87,6 +87,17 @@ const formEvents = () => {
       cart = [];
     }
   });
+
+  document.querySelector('#cart-area').addEventListener('click', (e) => {
+    if (e.target.id.includes('delete-item')) {
+      // const cartNum = document.querySelector('#cart-box').value;
+      const [, cartId] = e.target.id.split('--');
+
+      const index = cart.findIndex((item) => item.cartId === Number(cartId));
+      cart.splice(index, 1);
+      displayCart(cart);
+    }
+  });
 };
 
 export default formEvents;
