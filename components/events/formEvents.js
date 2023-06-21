@@ -7,7 +7,7 @@ import displayCart from '../../utils/displayCart';
 
 let cart = [];
 
-const formEvents = () => {
+const formEvents = (user) => {
   document.querySelector('#all-orders').addEventListener('click', (e) => {
     if (e.target.id.includes('edit-btn')) {
       const [, firebaseKey] = e.target.id.split('--');
@@ -60,6 +60,7 @@ const formEvents = () => {
     }
 
     if (e.target.id.includes('form-button')) {
+      console.warn(user.uid);
       // cart = [];
       // document.querySelector('#form-area').innerHTML = '';
       const payload = {
@@ -72,9 +73,9 @@ const formEvents = () => {
         orderPhone: document.querySelector('#form-phone').value,
         orderTip: 0,
         orderTotal: 0,
-        // orderType: document.querySelector('input[name= OrderRadio]:checked').value,
+        orderType: document.querySelector('#form-type').value,
         paymentType: '',
-        uid: '',
+        uid: user.uid,
       };
 
       createOrder(payload).then(({ name }) => {

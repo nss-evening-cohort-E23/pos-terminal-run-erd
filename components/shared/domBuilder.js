@@ -6,6 +6,7 @@ const domBuilder = () => {
       <div id="navigation"></div>
       <div id="all-orders"></div>
       <div id="order-page"></div>
+      <div id="revenue"></div>
       <div>
         <div id="order-total"></div>
         <div id="order-details"></div>
@@ -14,7 +15,6 @@ const domBuilder = () => {
       <div id="landing-area"></div>
       <div id="form-area"></div>
       <div id="cart-area"></div>
-      <div id="revenue"></div>
     </div>
   `;
 

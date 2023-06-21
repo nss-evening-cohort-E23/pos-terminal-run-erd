@@ -4,7 +4,7 @@ import orderForm from '../../pages/orderForm';
 import displayCart from '../../utils/displayCart';
 import viewRevenue from '../../pages/revenue';
 
-const domEvents = () => {
+const domEvents = (user) => {
   document.querySelector('#landing-area').addEventListener('click', (e) => {
     if (e.target.id.includes('welcome-view')) {
       getOrder().then((orders) => viewOrders(orders));
@@ -17,6 +17,7 @@ const domEvents = () => {
     // Click event to create an order
     if (e.target.id.includes('welcome-create')) {
       orderForm();
+      console.warn(user.uid);
     }
   });
 

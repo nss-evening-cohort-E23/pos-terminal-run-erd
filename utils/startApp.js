@@ -6,13 +6,14 @@ import landingPage from '../pages/landingPage';
 import domEvents from '../components/events/domEvents';
 import formEvents from '../components/events/formEvents';
 
-const startApp = () => {
+const startApp = (user) => {
   domBuilder();
-  landingPage();
+  landingPage(user);
   navbar();
-  domEvents();
-  formEvents();
+  domEvents(user);
+  formEvents(user);
   document.querySelector('#navigation').innerHTML = '';
+  document.querySelector('#login-form-container').innerHTML = '';
   // getOrder().then((cards) => viewOrders(cards));
 };
 
