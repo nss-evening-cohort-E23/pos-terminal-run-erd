@@ -66,7 +66,7 @@ const formEvents = (user) => {
       // document.querySelector('#form-area').innerHTML = '';
       const payload = {
         isOpen: true,
-        orderBasePrice: document.querySelector('#cart-total'),
+        orderBasePrice: document.querySelector('#cart-total').value,
         orderDate: new Date(),
         orderDetails: cart || 'error',
         orderEmail: document.querySelector('#form-email').value,

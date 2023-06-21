@@ -2,13 +2,13 @@ import {
   getOrder,
   deleteOrder,
   getSingleOrder,
-  orderDetails
 } from '../../api/orderData';
 import { viewOrders } from '../../pages/orders';
 import orderForm from '../../pages/orderForm';
 import displayCart from '../../utils/displayCart';
 import orderDetailsPage from '../../pages/orderDetails';
 import viewRevenue from '../../pages/revenue';
+import closeOrder from '../../pages/closeOrder';
 
 const domEvents = (user) => {
   document.querySelector('#landing-area').addEventListener('click', (e) => {
@@ -67,6 +67,13 @@ const domEvents = (user) => {
     if (e.target.id.includes('detail-btn')) {
       const [, firebaseKey] = e.target.id.split('--');
       getSingleOrder(firebaseKey).then(orderDetailsPage);
+    }
+  });
+
+  document.querySelector('#order-details').addEventListener('click', (e) => {
+    if (e.target.id.includes('close-order')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      getSingleOrder(firebaseKey).then(closeOrder);
     }
   });
 };

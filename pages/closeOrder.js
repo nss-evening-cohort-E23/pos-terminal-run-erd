@@ -1,7 +1,7 @@
 import clearDom from '../utils/clearDom';
 import renderToDom from '../utils/renderToDom';
 
-const closeOrder = () => {
+const closeOrder = (obj) => {
   clearDom();
 
   const domString = `
@@ -20,13 +20,15 @@ const closeOrder = () => {
           <li><a class="dropdown-item" href="#">Google Pay</a></li>
         </ul>
       </div>
-      <label for="inputPassword5" class="form-label">Password</label>
+      <h3>Total: ${obj.orderBasePrice}</h3>
+      <label for="inputPassword5" class="form-label">Card Number</label>
       <input type="password" id="inputPassword5" class="form-control" aria-labelledby="passwordHelpBlock">
       <input class="form-control" type="text" placeholder="Tip Amount" aria-label="default input example">
     </div>
   `;
 
   renderToDom('#close-order', domString);
+  console.warn(obj);
 };
 
 export default closeOrder;
