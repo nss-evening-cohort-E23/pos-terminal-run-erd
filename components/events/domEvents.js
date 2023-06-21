@@ -2,7 +2,6 @@ import {
   getOrder,
   deleteOrder,
   getSingleOrder,
-  orderDetails
 } from '../../api/orderData';
 import { viewOrders } from '../../pages/orders';
 import orderForm from '../../pages/orderForm';
