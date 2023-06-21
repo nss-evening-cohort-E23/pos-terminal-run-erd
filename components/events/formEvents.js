@@ -4,6 +4,7 @@ import {
 import { viewOrders } from '../../pages/orders';
 import { getSingleMenuItem } from '../../api/menuData';
 import displayCart from '../../utils/displayCart';
+import closeOrder from '../../pages/closeOrder';
 // import orderDetailsPage from '../../pages/orderDetails';
 
 let cart = [];
@@ -15,6 +16,39 @@ const formEvents = (user) => {
       getSingleOrder(firebaseKey).then((data) => {
         cart = data.orderDetails;
         console.warn(cart);
+      });
+    }
+  });
+
+  document.querySelector('#close-order').addEventListener('keyup', (e) => {
+    e.preventDefault();
+    if (e.target.id.includes('order-tip')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      const result = e.target.value;
+      getSingleOrder(firebaseKey).then(() => {
+        const payload = {
+          orderTip: result,
+        };
+
+        updateOrder(payload).then(closeOrder);
+      });
+    }
+  });
+
+  document.querySelector('#payment').addEventListener('click', (e) => {
+    if (e.target.id.includes('submit-payment')) {
+      // const [, firebaseKey] = e.target.id.split('--');
+      // getSingleOrder(firebaseKey).then((item) )
+
+      const payload = {
+        isOpen: false,
+        orderTip: document.querySelector('#order-tip').value,
+        orderTotal: document.querySelector('#order-total').value,
+        paymentType: document.querySelector('#payment-type').value
+      };
+
+      updateOrder(payload).then(() => {
+        getOrder().then(viewOrders);
       });
     }
   });
