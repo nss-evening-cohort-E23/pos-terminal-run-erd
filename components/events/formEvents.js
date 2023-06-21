@@ -4,6 +4,7 @@ import {
 import { viewOrders } from '../../pages/orders';
 import { getSingleMenuItem } from '../../api/menuData';
 import displayCart from '../../utils/displayCart';
+// import orderDetailsPage from '../../pages/orderDetails';
 
 let cart = [];
 
@@ -82,10 +83,22 @@ const formEvents = (user) => {
         const patchPayload = { firebaseKey: name };
 
         updateOrder(patchPayload).then(() => {
-          getOrder().then((orders) => viewOrders(orders));
+          getOrder().then(viewOrders);
+          // console.warn(firebaseKey);
         });
       });
       cart = [];
+    }
+  });
+
+  document.querySelector('#cart-area').addEventListener('click', (e) => {
+    if (e.target.id.includes('delete-item')) {
+      // const cartNum = document.querySelector('#cart-box').value;
+      const [, cartId] = e.target.id.split('--');
+
+      const index = cart.findIndex((item) => item.cartId === Number(cartId));
+      cart.splice(index);
+      displayCart(cart);
     }
   });
 };

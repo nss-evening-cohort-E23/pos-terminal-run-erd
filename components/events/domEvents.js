@@ -1,7 +1,13 @@
-import { getOrder, deleteOrder, getSingleOrder } from '../../api/orderData';
+import {
+  getOrder,
+  deleteOrder,
+  getSingleOrder,
+  orderDetails
+} from '../../api/orderData';
 import { viewOrders } from '../../pages/orders';
 import orderForm from '../../pages/orderForm';
 import displayCart from '../../utils/displayCart';
+import orderDetailsPage from '../../pages/orderDetails';
 import viewRevenue from '../../pages/revenue';
 
 const domEvents = (user) => {
@@ -54,6 +60,13 @@ const domEvents = (user) => {
   document.querySelector('#navigation').addEventListener('click', (e) => {
     if (e.target.id.includes('view')) {
       getOrder().then(viewOrders);
+    }
+  });
+
+  document.querySelector('#all-orders').addEventListener('click', (e) => {
+    if (e.target.id.includes('detail-btn')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      getSingleOrder(firebaseKey).then(orderDetailsPage);
     }
   });
 };
