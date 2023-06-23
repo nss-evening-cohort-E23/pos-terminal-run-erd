@@ -20,35 +20,37 @@ const formEvents = (user) => {
     }
   });
 
-  document.querySelector('#close-order').addEventListener('keyup', (e) => {
+  document.querySelector('#close-order').addEventListener('click', (e) => {
     e.preventDefault();
-    if (e.target.id.includes('order-tip')) {
+    if (e.target.id.includes('button-addon2')) {
       const [, firebaseKey] = e.target.id.split('--');
-      const result = e.target.value;
       getSingleOrder(firebaseKey).then(() => {
         const payload = {
-          orderTip: result,
+          orderTip: document.querySelector('#order-tip').value,
+          firebaseKey
         };
 
-        updateOrder(payload).then(closeOrder);
+        updateOrder(payload).then(() => {
+          getSingleOrder(firebaseKey).then(closeOrder);
+        });
       });
     }
   });
 
-  document.querySelector('#payment').addEventListener('click', (e) => {
+  document.querySelector('#close-order').addEventListener('click', (e) => {
     if (e.target.id.includes('submit-payment')) {
-      // const [, firebaseKey] = e.target.id.split('--');
+      const [, firebaseKey] = e.target.id.split('--');
       // getSingleOrder(firebaseKey).then((item) )
-
-      const payload = {
-        isOpen: false,
-        orderTip: document.querySelector('#order-tip').value,
-        orderTotal: document.querySelector('#order-total').value,
-        paymentType: document.querySelector('#payment-type').value
-      };
-
-      updateOrder(payload).then(() => {
-        getOrder().then(viewOrders);
+      getSingleOrder(firebaseKey).then(() => {
+        const payload = {
+          isOpen: false,
+          orderTotal: document.querySelector('#order-total').value,
+          paymentType: document.querySelector('#payment-type').value,
+          firebaseKey
+        };
+        updateOrder(payload).then(() => {
+          getOrder().then(viewOrders);
+        });
       });
     }
   });
@@ -111,6 +113,7 @@ const formEvents = (user) => {
         orderType: document.querySelector('#form-type').value,
         paymentType: '',
         uid: user.uid,
+        firebaseKey: '',
       };
 
       createOrder(payload).then(({ name }) => {
