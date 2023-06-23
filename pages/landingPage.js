@@ -1,6 +1,9 @@
+import clearDom from '../utils/clearDom';
 import renderToDom from '../utils/renderToDom';
 
 const landingPage = (user) => {
+  clearDom();
+
   const domString = `
   <h5>Welcome ${user.displayName}!</h5>
   <div id="welcome-btns">
