@@ -82,7 +82,7 @@ const orderDetails = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 const getClosedOrders = () => new Promise((resolve, reject) => {
-  fetch(`${endPoint}/order.json?orderBy="isClosed"&equalTo=false`, {
+  fetch(`${endPoint}/order.json?orderBy="isOpen"&equalTo=false`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'

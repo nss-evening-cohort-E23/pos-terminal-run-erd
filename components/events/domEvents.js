@@ -17,7 +17,7 @@ const domEvents = (user) => {
     }
 
     if (e.target.id.includes('welcome-rev')) {
-      getOrder().then(viewRevenue);
+      getClosedOrders().then(viewRevenue);
     }
 
     // Click event to create an order
