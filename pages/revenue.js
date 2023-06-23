@@ -1,39 +1,34 @@
-import logoutButton from '../components/logoutButton';
-import navbar from '../components/navBar';
+// import logoutButton from '../components/logoutButton';
+// import navbar from '../components/navBar';
 import clearDom from '../utils/clearDom';
 import renderToDom from '../utils/renderToDom';
 
-const viewRevenue = () => {
-  navbar();
+const viewRevenue = (arr) => {
   clearDom();
-  logoutButton();
+  let tableInfo = '';
+  let num = 0;
+  arr.forEach((obj) => {
+    num += 1;
+    tableInfo += `
+    <tr>
+    <th scope="row">${num}</th>
+    <td>${obj.orderName}</td>
+    <td>${obj.orderEmail}</td>
+    <td>${obj.orderTotal}</td>
+  </tr>
+    `;
+  });
   const domString = `<table class="table">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Order Total</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    ${tableInfo}
   </tbody>
 </table>`;
 
