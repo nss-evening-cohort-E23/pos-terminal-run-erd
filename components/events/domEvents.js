@@ -2,6 +2,7 @@ import {
   getOrder,
   deleteOrder,
   getSingleOrder,
+  getClosedOrders,
 } from '../../api/orderData';
 import { viewOrders } from '../../pages/orders';
 import orderForm from '../../pages/orderForm';
@@ -17,7 +18,7 @@ const domEvents = (user) => {
     }
 
     if (e.target.id.includes('welcome-rev')) {
-      viewRevenue();
+      getClosedOrders().then(viewRevenue);
     }
 
     // Click event to create an order

@@ -132,11 +132,13 @@ const formEvents = (user) => {
   document.querySelector('#cart-area').addEventListener('click', (e) => {
     if (e.target.id.includes('delete-item')) {
       // const cartNum = document.querySelector('#cart-box').value;
-      const [, cartId] = e.target.id.split('--');
+      // const [, cartId] = e.target.id.split('--');
+      const selectedItem = document.querySelector('#cart-area select').selectedIndex;
 
-      const index = cart.findIndex((item) => item.cartId === Number(cartId));
-      cart.splice(index);
+      // const index = cart.findIndex((item) => item.cartId === Number(cartId));
+      cart.splice(selectedItem - 2, 1);
       displayCart(cart);
+      console.warn(selectedItem);
     }
   });
 };
