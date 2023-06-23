@@ -7,8 +7,10 @@ const viewRevenue = (arr) => {
   clearDom();
   let tableInfo = '';
   let num = 0;
+  let grandTotal = 0;
   arr.forEach((obj) => {
     num += 1;
+    grandTotal += obj.orderTotal;
     tableInfo += `
     <tr>
     <th scope="row">${num}</th>
@@ -18,7 +20,9 @@ const viewRevenue = (arr) => {
   </tr>
     `;
   });
-  const domString = `<table class="table">
+  const domString = `
+  <h5>Total Revenue: $${grandTotal}</h5>
+  <table class="table">
   <thead>
     <tr>
       <th scope="col">#</th>
