@@ -4,6 +4,7 @@ import {
 import { viewOrders } from '../../pages/orders';
 import { getSingleMenuItem } from '../../api/menuData';
 import displayCart from '../../utils/displayCart';
+import closeOrder from '../../pages/closeOrder';
 // import orderDetailsPage from '../../pages/orderDetails';
 
 let cart = [];
@@ -15,6 +16,42 @@ const formEvents = (user) => {
       getSingleOrder(firebaseKey).then((data) => {
         cart = data.orderDetails;
         console.warn(cart);
+      });
+    }
+  });
+
+  document.querySelector('#close-order').addEventListener('click', (e) => {
+    e.preventDefault();
+    if (e.target.id.includes('button-addon2')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      getSingleOrder(firebaseKey).then(() => {
+        const payload = {
+          orderTip: document.querySelector('#order-tip').value,
+          firebaseKey
+        };
+
+        updateOrder(payload).then(() => {
+          getSingleOrder(firebaseKey).then(closeOrder);
+        });
+      });
+    }
+  });
+
+  document.querySelector('#close-order').addEventListener('click', (e) => {
+    if (e.target.id.includes('submit-payment')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      // getSingleOrder(firebaseKey).then((item) )
+      getSingleOrder(firebaseKey).then((obj) => {
+        const total = Number(obj.orderTip) + Number(obj.orderBasePrice);
+        const payload = {
+          isOpen: false,
+          orderTotal: total,
+          paymentType: document.querySelector('#form-type').value,
+          firebaseKey
+        };
+        updateOrder(payload).then(() => {
+          getOrder().then(viewOrders);
+        });
       });
     }
   });
@@ -77,6 +114,7 @@ const formEvents = (user) => {
         orderType: document.querySelector('#form-type').value,
         paymentType: '',
         uid: user.uid,
+        firebaseKey: '',
       };
 
       createOrder(payload).then(({ name }) => {

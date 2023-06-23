@@ -9,6 +9,8 @@ import orderForm from '../../pages/orderForm';
 import displayCart from '../../utils/displayCart';
 import orderDetailsPage from '../../pages/orderDetails';
 import viewRevenue from '../../pages/revenue';
+import closeOrder from '../../pages/closeOrder';
+import landingPage from '../../pages/landingPage';
 
 const domEvents = (user) => {
   document.querySelector('#landing-area').addEventListener('click', (e) => {
@@ -56,10 +58,18 @@ const domEvents = (user) => {
     if (e.target.id.includes('create')) {
       orderForm();
     }
+
+    if (e.target.id.includes('home')) {
+      landingPage(user);
+    }
   });
   document.querySelector('#navigation').addEventListener('click', (e) => {
     if (e.target.id.includes('view')) {
       getOrder().then(viewOrders);
+    }
+
+    if (e.target.id.includes('home')) {
+      landingPage(user);
     }
   });
 
@@ -67,6 +77,13 @@ const domEvents = (user) => {
     if (e.target.id.includes('detail-btn')) {
       const [, firebaseKey] = e.target.id.split('--');
       getSingleOrder(firebaseKey).then(orderDetailsPage);
+    }
+  });
+
+  document.querySelector('#order-details').addEventListener('click', (e) => {
+    if (e.target.id.includes('close-order')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      getSingleOrder(firebaseKey).then(closeOrder);
     }
   });
 };
