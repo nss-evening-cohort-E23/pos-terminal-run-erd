@@ -41,11 +41,12 @@ const formEvents = (user) => {
     if (e.target.id.includes('submit-payment')) {
       const [, firebaseKey] = e.target.id.split('--');
       // getSingleOrder(firebaseKey).then((item) )
-      getSingleOrder(firebaseKey).then(() => {
+      getSingleOrder(firebaseKey).then((obj) => {
+        const total = Number(obj.orderTip) + Number(obj.orderBasePrice);
         const payload = {
           isOpen: false,
-          orderTotal: document.querySelector('#order-total').value,
-          paymentType: document.querySelector('#payment-type').value,
+          orderTotal: total,
+          paymentType: document.querySelector('#form-type').value,
           firebaseKey
         };
         updateOrder(payload).then(() => {

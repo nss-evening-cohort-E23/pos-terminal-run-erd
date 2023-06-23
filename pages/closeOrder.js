@@ -23,17 +23,17 @@ const closeOrder = (obj) => {
       </div>
       <h5>Tip: $${obj.orderTip}</h5>
       <h3 id="order-total" value="${total}">Total: $${total}</h3>
-      <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-         Payment Type
-        </button>
-        <ul class="dropdown-menu" id="payment-type">
-          <li><a class="dropdown-item" value="cash" href="#">Cash</a></li>
-          <li><a class="dropdown-item" value="visa" href="#">Visa</a></li>
-          <li><a class="dropdown-item" value="master card" href="#">Master Card</a></li>
-          <li><a class="dropdown-item" value="discover" href="#">Discover</a></li>
-          <li><a class="dropdown-item" value="apple pay" href="#">Apple Pay</a></li>
-          <li><a class="dropdown-item" value="google pay" href="#">Google Pay</a></li>
-        </ul>
+      <div class="col-auto my-1">
+        <label class="mr-sm-2" for="inlineFormCustomSelect">Payment Type</label>
+        <select class="custom-select mr-sm-2" id="form-type">
+          <option selected>Choose...</option>
+          <option value="cash">Cash</option>
+          <option value="card">Card</option>
+          <option value="apple-pay">Apple Pay</option>
+          <option value="google-pay">Google Pay</option>
+        </select>
+      </div>
+        <h4></h4>
       <input type="password" id="inputPassword5" class="form-control" aria-labelledby="passwordHelpBlock" placeholder="Card Number">
       <div id="payment">
         <button type="button" class="btn btn-outline-primary" id="submit-payment--${obj.firebaseKey}">Submit Payment</button>
