@@ -6,6 +6,7 @@ const clearDom = () => {
   document.querySelector('#cart-area').innerHTML = '';
   document.querySelector('#close-order').innerHTML = '';
   document.querySelector('#order-details').innerHTML = '';
+  document.querySelector('#revenue').innerHTML = '';
 };
 
 export default clearDom;

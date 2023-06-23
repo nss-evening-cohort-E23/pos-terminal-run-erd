@@ -45,7 +45,7 @@ const orderForm = (obj = {}) => {
 
     <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Dropdown button
+        Menu
       </button>
       <ul class="dropdown-menu">
         <div item="drop-items">${domItems}</div>
