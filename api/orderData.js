@@ -1,7 +1,7 @@
 const endPoint = 'https://run-erd-default-rtdb.firebaseio.com/';
 
 const getOrder = () => new Promise((resolve, reject) => {
-  fetch(`${endPoint}/order.json`, {
+  fetch(`${endPoint}/order.json?orderBy="isOpen"&equalTo=true`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
