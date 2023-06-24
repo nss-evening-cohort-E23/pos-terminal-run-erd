@@ -18,7 +18,7 @@ const closeOrder = (obj) => {
       <div id="tip">
         <div class="input-group mb-3">
           <input type="text" id="order-tip" class="form-control" placeholder="Tip Amount" aria-label="Recipient's username" aria-describedby="button-addon2">
-          <button class="btn btn-outline-secondary tip-btn" type="button" id="button-addon2--${obj.firebaseKey}">Confirm Tip</button>
+          <button class="btn btn-success tip-btn" type="button" id="button-addon2--${obj.firebaseKey}">Confirm Tip</button>
         </div>
       </div>
       <h5>Tip: $${obj.orderTip}</h5>
@@ -36,7 +36,7 @@ const closeOrder = (obj) => {
         <h4></h4>
       <input type="password" id="inputPassword5" class="form-control" aria-labelledby="passwordHelpBlock" placeholder="Card Number">
       <div id="payment">
-        <button type="button" class="btn btn-outline-primary" id="submit-payment--${obj.firebaseKey}">Submit Payment</button>
+        <button type="button" class="btn btn-primary" id="submit-payment--${obj.firebaseKey}">Submit Payment</button>
       </div>
     </div>
   `;
