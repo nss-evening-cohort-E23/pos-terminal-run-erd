@@ -18,9 +18,6 @@ const navbar = () => {
     <a class="nav-link" href="#" id="create">Create an Order</a>
     </li>
     </ul>
-    <form class="d-flex" role="search">
-    <input class="form-control me-2" type="search" placeholder="Search Orders" aria-label="Search Orders"></input>
-    </form>
     <div id="logout-button"></div>
       </div>
     </div>
