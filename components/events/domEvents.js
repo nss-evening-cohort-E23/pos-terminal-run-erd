@@ -60,6 +60,7 @@ const domEvents = (user) => {
     }
 
     if (e.target.id.includes('home')) {
+      document.querySelector('#navigation').innerHTML = '';
       landingPage(user);
     }
   });
