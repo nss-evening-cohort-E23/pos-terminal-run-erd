@@ -11,6 +11,7 @@ import orderDetailsPage from '../../pages/orderDetails';
 import viewRevenue from '../../pages/revenue';
 import closeOrder from '../../pages/closeOrder';
 import landingPage from '../../pages/landingPage';
+import navbar from '../navBar';
 
 const domEvents = (user) => {
   document.querySelector('#landing-area').addEventListener('click', (e) => {
@@ -19,11 +20,13 @@ const domEvents = (user) => {
     }
 
     if (e.target.id.includes('welcome-rev')) {
+      navbar();
       getClosedOrders().then(viewRevenue);
     }
 
     // Click event to create an order
     if (e.target.id.includes('welcome-create')) {
+      navbar();
       orderForm();
       console.warn(user.uid);
     }
