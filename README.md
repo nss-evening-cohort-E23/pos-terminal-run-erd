@@ -1,46 +1,51 @@
-<div style="text-align:center">
-<h1>Hip Hop, Pizza, and Wangs (HHP+W)</h1>
+## Yeastie Boys POS System ![D590168B-48DE-4C4B-9B99-E9A983260F8C_1_105_c](https://github.com/nss-evening-cohort-E23/pos-terminal-run-erd/assets/124822733/a20f26f5-7ab8-487d-8b0b-4069d266bb58)
 
-<image src="https://user-images.githubusercontent.com/29741570/205346767-a182560c-64a6-4cfa-80b3-0d64cf998242.png" style="height:300px;"></image></div>
+## Overview of Project
+Yeastie Boys allows users to create, manage, and view menu orders at Hip Hop, Pizza & Wings. 
+## Link To Netlify Deployment
+<https://tiny-stardust-84e62a.netlify.app/#>
 
-## Get Started
-**READ ALL INSTRUCTIONS BEFORE BEGINNING THIS PROJECT.** Take notes as you read.
+## wireframes used
+<(https://www.figma.com/file/4y3EZddALuBR3ouSEM57Np/MVP?node-id=0%3A1)>
 
-Everything that needs to be done before coding starts.
+## Link to dbDiagram 
+<https://dbdiagram.io/d/6487c7bf722eb77494d89b89>
 
-* **ERD** - Create an ERD to show the relationships between all of  your data
-* **Postman Collection** - Create a postman collection to store and test out all of your API calls.
-* **[Wireframes](https://www.figma.com/file/4y3EZddALuBR3ouSEM57Np/MVP?node-id=0%3A1)** - This is the basic MVP wireframe. You can choose to style how you wish.
-* **Flowchart** - Plan out the flow of your data through the application
-* **Github Issue Tickets** - Using the Project Instructions as a guide, create issue tickets for this project’s work.
-* **Github Milestones** - Separate those issue tickets into Milestones to plan out the work.
+## Description of user
+Any employee of restaurant.
 
-## Definition of Done
+## List of features
+* Landing page shows create order, view orders, and revenue page button.
+* allows user to create an order that contains fields for order name, order email and phone, order type (phoned or walk-in), and a dropdown menu.
+* allows user to view all orders created within one page. Each individual order card contains an edit, delete, and order details link.
+* Edit order allows the user to change any fields of an existing order, as well as delete menu items in the cart field. 
+* Delete functionality that allows the user to delete any order on the view orders page. 
+* Order details page allows the user to view all details pertaining to an individual order.
+* The close order button on the order details page allows the user to add a tip and payment type, and close the order. 
+* Revenue page allows the user to view total sales for individual users, as well as total revenue for all orders including tips. 
 
-Do not submit this project until all of the following are complete:
+##list of contributors and links to their Github profiles
+Michael Brantley <https://github.com/brantleyrecs>
+Evan Morgan <https://github.com/EvanM1995>
+Thomas Rice <https://github.com/trice7>
+Hallie Tucker <https://github.com/datcog1111>
 
-1. All items are completed in getting started
-1. MVP, defined by the Acceptance Criteria, has been completed
-1. The title of your application is visible in the browser tab
-1. The project has been deployed
-1. Loom video has been created
-1. `README.md` has been updated
+## Screenshots of application
+Landing Page
+<img width="810" alt="Screenshot 2023-06-24 at 10 20 39 AM" src="https://github.com/nss-evening-cohort-E23/pos-terminal-run-erd/assets/124822733/75bcb645-539d-4719-a687-d150c9a3c5bc">
 
-## Requirements
+View All Orders
+<img width="1432" alt="Screenshot 2023-06-24 at 10 21 31 AM" src="https://github.com/nss-evening-cohort-E23/pos-terminal-run-erd/assets/124822733/3f657de4-b0ef-47a4-a84e-afa8668f0e54">
 
-Things to remember while coding out the project
+Create Order
+<img width="1436" alt="Screenshot 2023-06-24 at 10 21 45 AM" src="https://github.com/nss-evening-cohort-E23/pos-terminal-run-erd/assets/124822733/a6cca167-0f30-4fdf-b44d-408884812079">
 
-* Clean code - single responsibility principle
-* ES6 Modules bundled with webpack
-* No errors - linters should be clean
-* Bootstrap for styling
-* Completely planned out - before each section you should be making new cards on your Github project board before you code
-* Wireframes are provided for you for MVP
-* You should have an ERD
+Order Details
+<img width="1433" alt="Screenshot 2023-06-24 at 10 21 59 AM" src="https://github.com/nss-evening-cohort-E23/pos-terminal-run-erd/assets/124822733/9f98d333-2fd2-4b47-93bb-cb600c59126e">
 
-### Instructions
+Revenue Page
+<img width="1426" alt="Screenshot 2023-06-24 at 10 22 19 AM" src="https://github.com/nss-evening-cohort-E23/pos-terminal-run-erd/assets/124822733/c0ae5d22-a4b3-4b3c-97f7-d6c8c283b2f4">
 
-* [MVP Definition - It Gets the Job Done](./instructions/mvp.md)
-* [Stretch Goals 1 - Filtering the Data](./instructions/stretch-1.md)
-* [Stretch Goals 2 - Dealing with Change](./instructions/stretch-2.md)
-* [Stretch Goals 3 - Play that Funky Music](./instructions/stretch-3.md)
+## Link to LOOM Video
+<>
+
