@@ -25,7 +25,7 @@ const orderDetailsPage = (obj) => {
 
   domString += `
       <h1 class="card-title">${obj.orderName}'s Order</h1>
-      <h6 class="card-subtitle mb-2 text-body-secondary">${obj.orderPhone}</h6>
+      <h6 id="phone-details" class="card-subtitle mb-2">${obj.orderPhone}</h6>
       <h3>Total: ${obj.orderBasePrice}</h3>
       <button type="button" id="close-order--${obj.firebaseKey}" class="btn btn-primary">Close Order</button>
       <div class="card" style="width: 18rem;">
