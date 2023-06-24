@@ -3,8 +3,59 @@
 
 
 body {
-  background-color: antiquewhite;
-  color: brown;
+  background-image: url(https://e0.pxfuel.com/wallpapers/750/174/desktop-wallpaper-3d-diagonal-paper-stripes-retro-vectors-clipart-graphics-vector-art-retro-futurism.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-repeat: repeat;
+  color: white;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-style: italic;
   text-align: center;
   margin-top: 100px;
 }
+
+.navbar {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  background-color: antiquewhite;
+  
+}
+
+#all-orders {
+ width: 90%;
+ display: flex;
+ flex-flow: row wrap;
+ text-align: center;
+ margin: auto;
+ justify-content: center;
+ 
+}
+
+.card {
+  width: 100%;
+  margin: 5px;
+  contain: content;
+}
+
+#form-area {
+  width: 70%;
+  margin: auto;
+  justify-content: center;
+}
+
+.table {
+  width: 70%;
+  margin: auto;
+  justify-content: center;
+}
+
+#cart-area {
+  width: 70%;
+  margin: auto;
+  justify-content: center;
+}
+
+
+
+
+
+
